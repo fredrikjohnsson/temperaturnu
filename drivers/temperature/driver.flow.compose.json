@@ -1,0 +1,24 @@
+{
+  "triggers": [
+    {
+      "id": "temperature-updated",
+      "title": {
+        "en": "Temperature updated",
+        "sv": "Temperaturen uppdaterades"
+      },
+      "tokens": [
+        {
+          "type": "number",
+          "name": "temperature",
+          "title": {
+            "en": "Temperature",
+            "sv": "Temperatur"
+          },
+          "example": {
+            "en": "13.2"
+          }
+        }
+      ]
+    }
+  ]
+}

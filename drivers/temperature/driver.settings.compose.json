@@ -1,0 +1,8 @@
+[
+    {
+        "id": "stationid",
+        "type": "text",
+        "label": { "en": "Station ID" },
+        "value": ""
+    }
+]
