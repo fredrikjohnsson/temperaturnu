@@ -3,6 +3,7 @@ import Homey from 'homey';
 const fetch = require('node-fetch');
 
 const baseUrl = 'api.temperatur.nu/tnu_1.17.php';
+const apiInfo = 'Temperatur.nu API 1.17';
 
 class TemperatureDevice extends Homey.Device {
   async onInit() {
@@ -69,13 +70,30 @@ class TemperatureDevice extends Homey.Device {
     // Fetch JSON with lowercase station ID
     const jsonData = await this.fetchData(stationId.toLowerCase());
 
-    if (jsonData != '') {
-      // Extract temperature from JSON
+    if (jsonData != '' && jsonData != undefined) {
+      // Extract data from JSON
       const jsonObj = JSON.parse(jsonData);
-      const temperature = parseFloat(jsonObj.stations[0].temp);        
+      const title = jsonObj.title;
+
+      // Verify that correct API info is in JSON data
+      if (title != apiInfo) { 
+        this.log('[fetchTemperature] API info is not correct in JSON data');
+        return Promise.resolve(false)
+      }
+
+      // Extract temperature from JSON
+      let temperature = jsonObj.stations[0].temp;
+
+      // Check for undefined temperature
+      if (temperature != undefined) { 
+        temperature = parseFloat(temperature)
+      } else {
+        this.log('[fetchTemperature] Temperature is undefined in JSON');
+        return Promise.resolve(false)
+      }
 
       // Save temperature
-      const varType = typeof(temperature);
+      const varType = typeof(temperature); 
       if (varType != 'number' || isNaN(temperature)) {
         this.log('[fetchTemperature] Variable is not of type number (is ' + varType + ') or temperature is NaN: ' + temperature);
         return Promise.resolve(false);
@@ -86,7 +104,7 @@ class TemperatureDevice extends Homey.Device {
 
       // Temperature updated trigger
       const temperatureUpdatedCard = this.homey.flow.getDeviceTriggerCard('temperature-updated');
-      temperatureUpdatedCard.trigger(this, {'temperature': temperature});
+      temperatureUpdatedCard.trigger(this, {'temperature': temperature}).catch(this.error);
       
       return Promise.resolve(true)
     }
