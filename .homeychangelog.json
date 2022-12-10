@@ -1,23 +1,26 @@
 {
-    "1.0.0": {
-      "en": "First public version"
-    },
-    "1.0.1": {
-      "en": "1.5.x compatibility fix"
-    },
-    "1.0.2": {
-      "en": "Station ID no longer needs to be in lowercase, temperature is now fetched directly when station ID changed"
-    },
-    "1.1.0": {
-      "en": "Added an action flow card that reports temperature to temperatur.nu"
-    },
-    "1.1.1": {
-      "en": "Bug fixed that make the app crash"
-    },
-    "1.1.2": {
-      "en": "Updated node-fetch to v2.6.1 and code clean-up"
-    },
-    "1.1.3": {
-      "en": "Updated README"
-    }
+  "1.0.0": {
+    "en": "First public version"
+  },
+  "1.0.1": {
+    "en": "1.5.x compatibility fix"
+  },
+  "1.0.2": {
+    "en": "Station ID no longer needs to be in lowercase, temperature is now fetched directly when station ID changed"
+  },
+  "1.1.0": {
+    "en": "Added an action flow card that reports temperature to temperatur.nu"
+  },
+  "1.1.1": {
+    "en": "Bug fixed that make the app crash"
+  },
+  "1.1.2": {
+    "en": "Updated node-fetch to v2.6.1 and code clean-up"
+  },
+  "1.1.3": {
+    "en": "Updated README"
+  },
+  "3.0.0": {
+    "en": "Complete rebuild of app for SDKv3"
   }
+}
