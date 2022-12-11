@@ -17,12 +17,12 @@ class TemperatureDevice extends Homey.Device {
       // Fetch temperature
       this.log('[TemperatureDevice] Fetching temperature');
       this.fetchTemperature();
-
-      // Set to fetch temperature at an interval
-      setInterval(this.fetchTemperature.bind(this), POLL_INTERVAL);
     } else {
       this.log('[TemperatureDevice] Station ID is missing in settings');
     }
+
+    // Set to fetch temperature at an interval
+    setInterval(this.fetchTemperature.bind(this), POLL_INTERVAL);
   }
 
   /**
