@@ -22,5 +22,8 @@
   },
   "3.0.0": {
     "en": "Complete rebuild of app for SDKv3"
+  },
+  "3.0.1": {
+    "en": "A complete rebuild off app for SDK v3"
   }
 }
