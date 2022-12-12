@@ -11,9 +11,9 @@
   ],
   "connectivity": [],
   "images": {
-    "small": "{{driverAssetsPath}}/images/small.png",
-    "large": "{{driverAssetsPath}}/images/large.png",
-    "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
+    "small": "/drivers/temperature/assets/images/small.png",
+    "large": "/drivers/temperature/assets/images/large.png",
+    "xlarge": "/drivers/temperature/assets/images/xlarge.png"
   },
   "pair": [
     {
@@ -26,6 +26,16 @@
     {
       "id": "add_devices",
       "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "id": "stationid",
+      "type": "text",
+      "label": {
+        "en": "Station ID"
+      },
+      "value": ""
     }
   ]
 }

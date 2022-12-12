@@ -53,7 +53,10 @@ class TemperatureDevice extends Homey.Device {
    * @param {string} name The new name
    */
   async onRenamed(name: string) {
-    this.log('TemperatureDevice was renamed');
+    if (this.getSetting('stationid') != null) {
+      this.log('TemperatureDevice was renamed, fetching temperature');
+      this.fetchTemperature();
+    }
   }
 
   /**

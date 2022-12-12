@@ -1,0 +1,32 @@
+{
+  "title": {
+    "en": "Report temperature",
+    "sv": "Rapportera temperatur"
+  },
+  "titleFormatted": {
+    "en": "Report [[temperature]] to temperatur.nu with user hash [[hash]]",
+    "sv": "Rapportera [[temperature]] till temperatur.nu med användarhash [[hash]]"
+  },
+  "args": [
+    {
+      "type": "text",
+      "name": "hash",
+      "placeholder": {
+        "en": "station hash code",
+        "sv": "stationens hashkod"
+      }
+    },
+    {
+      "type": "number",
+      "name": "temperature",
+      "placeholder": {
+        "en": "temperature",
+        "sv": "temperatur"
+      },
+      "min": -50,
+      "max": 100,
+      "step": 0.1
+    }
+  ],
+  "id": "report-temperature"
+}
