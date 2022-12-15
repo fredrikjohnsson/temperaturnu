@@ -112,7 +112,8 @@ class TemperatureDevice extends Homey.Device {
       return Promise.resolve(true)
     }
     
-    this.log('[fetchTemperature] No JSON data, can not save temperature');
+    this.log('[fetchTemperature] No JSON data, can not get temperature');
+    this.setUnavailable().catch(this.error);
     return Promise.resolve(false);
   }
 
@@ -135,12 +136,21 @@ class TemperatureDevice extends Homey.Device {
       return '';
     }
 
-    // Parse JSON data and extract title
+    // Parse JSON data
     const jsonData = await response.text();
     const jsonObj = JSON.parse(jsonData);
-    const client = jsonObj.client;
+    
+    // Check if station is available in result
+    let station;
+    try {
+      station = jsonObj.stations[0];
+    } catch (err) {
+      this.log('[fetchData] Stations are missing from API call, aborting..');
+      return '';
+    }
 
     // Return JSON if not max API calls have been reached
+    const client = jsonObj.client;
     if (client == 'unsigned') {
       this.log('[fetchData] Returning JSON data');
       this.setWarning(null);
