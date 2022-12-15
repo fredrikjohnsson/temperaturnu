@@ -27,6 +27,8 @@ One action flow card is available called *Report temperature*. Add the card to a
 - Version 1.1.3 or older could crash on Homey v8+, use latest version of the app instead
 
 ### Changelog
+- **v3.0.3 (2022-12-15)**
+  - Fixes to prevent crashes
 - **v3.0.2 (2022-12-12)**
   - Complete rebuild to Homey SDKv3
   - Version numbering changed to match Homey SDK version
