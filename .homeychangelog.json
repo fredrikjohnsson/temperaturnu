@@ -31,5 +31,8 @@
   },
   "3.0.3": {
     "en": "Fixes to prevent crashes"
+  },
+  "3.0.4": {
+    "en": "Added some error handling"
   }
 }
