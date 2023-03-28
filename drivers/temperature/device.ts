@@ -137,8 +137,13 @@ class TemperatureDevice extends Homey.Device {
     }
 
     // Parse JSON data
-    const jsonData = await response.text();
-    const jsonObj = JSON.parse(jsonData);
+    try {
+      const jsonData = await response.text();
+      const jsonObj = JSON.parse(jsonData);
+    } catch (err) {
+      this.log('[fetchData] JSON not valid, aborting..');
+      return '';
+    }
     
     // Check if station is available in result
     let station;
