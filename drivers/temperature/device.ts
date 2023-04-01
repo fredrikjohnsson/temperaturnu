@@ -128,7 +128,14 @@ class TemperatureDevice extends Homey.Device {
 
     // Make API call
     this.log('[fetchData] Fetching data using unsigned URL')
-    let response = await fetch('http://' + url);
+    let response;
+    try {
+      response = await fetch('http://' + url);  
+    } catch (err) {
+      this.log('[fetchData] Error during fetch: ' + err);
+      return '';
+    }
+    
 
     // Take care of not ok responses
     if (!response.ok) {
