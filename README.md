@@ -1,8 +1,8 @@
 # temperatur.nu
-With this app you can report your outside temeprature to the Swedish site [temperatur.nu](http://www.temperatur.nu), or get your favorite station as a device.
+With this app you can report your outdoor temperature to the Swedish site [temperatur.nu](https://www.temperatur.nu), or get your favorite station as a device.
 
 ### Device settings
-When a temperature device is created it gets the closest station using geolocation. If gelocation is not available for some reason a default station is used. It is possible to change station ID by going to device settings and then Advanced settings. A station ID is needed for the device to work, and the station ID is the last part of an URL without the html part. To obtain an station ID, navigate to [temperatur.nu](http://www.temperatur.nu) and click on a city of interest. Look at the URL in the address bar and remember the last part. For example, in the URL https://www.temperatur.nu/evenas.html, station ID is evenas.
+When a temperature device is created it gets the closest station using geolocation. If geolocation is not available for some reason a default station is used. It is possible to change station ID by going to device settings and then Advanced settings. A station ID is needed for the device to work, and the station ID is the last part of an URL without the html part. To obtain an station ID, navigate to [temperatur.nu](https://www.temperatur.nu) and click on a city of interest. Look at the URL in the address bar and remember the last part. For example, in the URL https://www.temperatur.nu/evenas.html, station ID is evenas.
 
 ### Flow support
 *Triggers*
@@ -17,6 +17,12 @@ At the moment there are four triggers available:
 
 One action flow card is available called *Report temperature*. Add the card to a flow and fill in your stations hash code and select a temperature token.
 
+### API usage
+The app polls each station every five minutes. Unsigned API requests are limited to 15 per
+30 minutes per client and IP address. Three devices can exceed this limit, as can additional
+apps sharing the same connection. When requests are blocked, the device becomes unavailable
+and retries on the next polling cycle. Signed API access can be configured by the developer.
+
 ### Acknowledgement
  - Many thanks to [m.nu](http://www.m.nu) for sponsoring the reporting flow card.
 
@@ -27,6 +33,10 @@ One action flow card is available called *Report temperature*. Add the card to a
 - Version 1.1.3 or older could crash on Homey v8+, use latest version of the app instead.
 
 ### Changelog
+- **v3.1.0 (2026-10-25)**
+  - Stability changes
+  - Improved error recovery, polling, station changes and temperature reporting.
+  - Secure HTTPS connections and support for temperatur.nu API 1.20.
 - **v3.0.5 (2023-04-01)**
   - More error handling
 - **v3.0.4 (2023-03-28)**

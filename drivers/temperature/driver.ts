@@ -1,70 +1,42 @@
 import Homey from 'homey';
-
-const fetch = require('node-fetch');
+import { randomBytes } from 'crypto';
+import { getStations, stationId } from '../../lib/api';
 
 class TemperatureDriver extends Homey.Driver {
 
-  async onInit() {
-    this.log('TemperatureDriver has been inited');
-  }
+  private nearestStation?: Promise<{ title: string; stationId: string }>;
+  private nearestAt = 0;
 
   async onPairListDevices() {
-    const station = this.getNearestStation();
-    this.log('[onPairListDevices] Using station: ' + (await station).title + ', ID: ' + (await station).stationId);
-    
-    return [
-      {
-        name: (await station).title,
-        data: {
-          id: guid(),
-        },
-        settings: {
-          stationid: (await station).stationId,
-        },
-      },
-    ];
+    if (!this.nearestStation || Date.now() - this.nearestAt >= 300000) {
+      this.nearestAt = Date.now();
+      this.nearestStation = this.getNearestStation();
+    }
+    const station = await this.nearestStation;
+    return [{
+      name: station.title,
+      data: { id: randomBytes(16).toString('hex') },
+      settings: { stationid: station.stationId },
+    }];
   }
 
-  async getNearestStation(): Promise<{title: string, stationId: string}> {
-    // Get current geolocation
-    const lon = this.homey.geolocation.getLongitude();
-    const lat = this.homey.geolocation.getLatitude();
-    
-    // Create a temporary client ID
-    const cli = 'HomeyApp' + guid();
-    
-    // Check if geolocation is set
-    if (lon && lat) {
-      // Make API call
-      const url = 'http://api.temperatur.nu/tnu_1.17.php?lat='+ lat +'&lon=' + lon + '&cli=' + cli;
-      let response = await fetch(url);
-
-      // If API call was successful, extract title and station ID and return that
-      if (response.ok) {
-        const jsonData = await response.text();
-        const jsonObj = JSON.parse(jsonData);
-        const title = jsonObj.stations[0].title;
-        const stationId = jsonObj.stations[0].id;
-        return {title, stationId};
+  async getNearestStation(): Promise<{ title: string; stationId: string }> {
+    try {
+      const lon = this.homey.geolocation.getLongitude();
+      const lat = this.homey.geolocation.getLatitude();
+      if (typeof lon === 'number' && typeof lat === 'number' && Number.isFinite(lon) && Number.isFinite(lat)) {
+        const stations = await getStations({ lat: String(lat), lon: String(lon) }, {
+          clientId: Homey.env.TEMPERATUR_CLIENT_ID || 'HomeyAppPairing',
+          clientKey: Homey.env.TEMPERATUR_CLIENT_KEY,
+        });
+        return { title: stations[0].title, stationId: stationId(stations[0].id) };
       }
+    } catch {
+      this.log('Could not find the nearest station; using Högenorum. Station can be changed in settings.');
     }
-    
-    // Something when wrong when getting location, use default
-    const title = "Stenungsund";
-    const stationId = 'hogenorum';
-    return {title, stationId};
+    return { title: 'Stenungsund/Högenorum', stationId: 'hogenorum' };
   }
 
 }
 
 module.exports = TemperatureDriver;
-
-/*
-  Generation of device id
-*/
-function guid() {
-	function s4() {
-		return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-	}
-	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-}

@@ -12,8 +12,7 @@
   "connectivity": [],
   "images": {
     "small": "/drivers/temperature/assets/images/small.png",
-    "large": "/drivers/temperature/assets/images/large.png",
-    "xlarge": "/drivers/temperature/assets/images/xlarge.png"
+    "large": "/drivers/temperature/assets/images/large.png"
   },
   "pair": [
     {

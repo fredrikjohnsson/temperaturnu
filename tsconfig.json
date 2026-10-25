@@ -1,5 +1,6 @@
 {
   "extends": "@tsconfig/node12/tsconfig.json",
+  "exclude": ["node_modules", ".homeybuild", "test"],
   "compilerOptions": {
     "allowJs": true,
     "outDir": ".homeybuild/"
