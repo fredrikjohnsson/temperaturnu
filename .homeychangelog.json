@@ -40,5 +40,9 @@
   },
   "3.1.0": {
     "en": "Stability changes"
+  },
+  "3.1.1": {
+    "en": "Updated App Store descriptions and imagery, added support links and a Swedish readme, and removed outdated sponsor credits.",
+    "sv": "Uppdaterade App Store-texter och bilder, lade till supportlänkar och en svensk beskrivning samt tog bort inaktuella sponsortack."
   }
 }

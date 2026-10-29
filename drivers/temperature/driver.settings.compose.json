@@ -1,8 +1,11 @@
 [
-    {
-        "id": "stationid",
-        "type": "text",
-        "label": { "en": "Station ID" },
-        "value": ""
-    }
+  {
+    "id": "stationid",
+    "type": "text",
+    "label": {
+      "en": "Station ID",
+      "sv": "Stations-ID"
+    },
+    "value": ""
+  }
 ]

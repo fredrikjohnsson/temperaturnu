@@ -23,9 +23,6 @@ The app polls each station every five minutes. Unsigned API requests are limited
 apps sharing the same connection. When requests are blocked, the device becomes unavailable
 and retries on the next polling cycle. Signed API access can be configured by the developer.
 
-### Acknowledgement
- - Many thanks to [m.nu](http://www.m.nu) for sponsoring the reporting flow card.
-
 ### ToDo
 - Show timestamp of temperature value, this is available in the API.
 
@@ -33,6 +30,8 @@ and retries on the next polling cycle. Signed API access can be configured by th
 - Version 1.1.3 or older could crash on Homey v8+, use latest version of the app instead.
 
 ### Changelog
+- **v3.1.1 (2026-10-29)**
+  - Updated App Store descriptions and imagery, added support links and a Swedish readme, and removed outdated sponsor credits.
 - **v3.1.0 (2026-10-25)**
   - Stability changes
   - Improved error recovery, polling, station changes and temperature reporting.
